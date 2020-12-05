@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  zookeeper:
+    image: salzian/kafka:zookeeper
+    build:
+      context: ./zookeeper
+    ports:
+      - 127.0.0.1:8080:8080 # admin /commands
+      - 127.0.0.1:2181:2181 # client connections
+      - 127.0.0.1:2888:2888 # follower (other zookeepers) connections
+      - 127.0.0.1:3888:3888 # inter node connections
+    volumes:
+      - ./config/zookeeper.properties:/kafka/config/zookeeper.properties
+
+  broker:
+    image: salzian/kafka:broker
+    build:
+      context: ./broker
+    ports:
+      - 127.0.0.1:9092-9102:9092
+    volumes:
+      - ./config/server.properties:/kafka/config/server.properties
