@@ -4,7 +4,7 @@ services:
   zookeeper:
     image: salzian/kafka:zookeeper
     build:
-      context: ./zookeeper
+      context: ./dockerfiles/zookeeper
     ports:
       - 127.0.0.1:8080:8080 # admin /commands
       - 127.0.0.1:2181:2181 # client connections
@@ -16,7 +16,7 @@ services:
   broker:
     image: salzian/kafka:broker
     build:
-      context: ./broker
+      context: ./dockerfiles/broker
     ports:
       - 127.0.0.1:9092-9102:9092
     volumes:
